@@ -1,0 +1,12 @@
+name: List macOS software updates
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: macOS-latest
+    steps:
+      - name: List software updates
+        run: softwareupdate -list
