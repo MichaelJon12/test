@@ -8,11 +8,11 @@ jobs:
   build:
     runs-on: macOS-latest
     steps:
-      - name: Check for available updates
+      - name: List available updates
         run: softwareupdate -l
-        id: updates
-      - name: Extract macOS version
-        run: echo "::set-output name=version::$(echo '${{ steps.updates.outputs.stdout }}' | grep -oE 'macOS [^,]+' | awk '{print $2}')"
+        id: update-list
+      - name: Extract latest version
+        run: echo ::set-output name=version::$(echo "${{ steps.update-list.outputs.stdout }}" | grep "macOS" | awk '{print $5}' | cut -d ',' -f 1)
         id: macos-version
       - name: Print version
         run: echo "Latest macOS version is ${{ steps.macos-version.outputs.version }}"
