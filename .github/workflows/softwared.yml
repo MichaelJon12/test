@@ -9,10 +9,4 @@ jobs:
     runs-on: macOS-latest
     steps:
       - name: List available updates
-        run: softwareupdate -l
-        id: update-list
-      - name: Extract latest version
-        run: echo ::set-output name=version::$(echo "${{ steps.update-list.outputs.stdout }}" | grep "macOS" | awk '{print $5}' | cut -d ',' -f 1)
-        id: macos-version
-      - name: Print version
-        run: echo "Latest macOS version is ${{ steps.macos-version.outputs.version }}"
+        run: curl -s https://support.apple.com/en-gb/HT201222 | grep -o 'The latest version of macOS is [0-9]\+\.[0-9]\+\(\.[0-9]\+\)\?' | grep -o '[0-9]\+\.[0-9]\+\(\.[0-9]\+\)\?'
