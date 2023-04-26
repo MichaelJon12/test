@@ -10,4 +10,4 @@ jobs:
     runs-on: macOS-latest
     steps:
       - name: List software updates
-        run: softwareupdate -list
+        run: softwareupdate -l
